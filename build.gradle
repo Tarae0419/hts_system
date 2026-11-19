@@ -11,14 +11,45 @@ repositories {
 }
 
 dependencies {
+    // Spring 모듈 버전 통일
+    implementation platform('org.springframework:spring-framework-bom:7.0.10')
+
     // Spring MVC
-    implementation 'org.springframework:spring-webmvc:7.0.10'
+    implementation 'org.springframework:spring-webmvc'
+
+    // JDBC 및 트랜잭션
+    implementation 'org.springframework:spring-jdbc'
+    implementation 'org.springframework:spring-tx'
+
+    // JSON 요청·응답 변환
+    implementation 'tools.jackson.core:jackson-databind:3.0.3'
+
+    // 요청값 검증: @Valid, @NotBlank 등
+    implementation 'org.hibernate.validator:hibernate-validator:9.0.2.Final'
+
+    // 애플리케이션 로그
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+
+    // swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.1'
+
+    // MySQL JDBC 드라이버 및 커넥션 풀
+    runtimeOnly 'com.mysql:mysql-connector-j:9.5.0'
+    implementation 'com.zaxxer:HikariCP:7.0.2'
+
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.21'
 
     compileOnly 'jakarta.servlet:jakarta.servlet-api:6.1.0'
 
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.springframework:spring-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.compilerArgs.add('-parameters')
 }
 
 test {

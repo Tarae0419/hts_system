@@ -1,4 +1,4 @@
-package com.hts;
+package com.hts.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
